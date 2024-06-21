@@ -1,0 +1,8 @@
+.idea
+.env
+storage
+!storage/.gitkeep
+log
+!log/.gitkeep
+tmp
+!tmp/.gitkeep
