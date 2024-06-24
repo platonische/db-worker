@@ -12,10 +12,6 @@ if [[ $SERVER_LIVE -eq 1 ]]; then
   exit 1
 fi
 
-
-#DATE=$(date '+%Y%m%d')
-#FILENAME="${DATE}${DB_DUMP_FILE_SUFFIX}"
-
 if [[ $SYNC_BY_SSH -eq 1 ]]; then
   AUTH="${SOURCE_SSH_USER}@${SOURCE_SSH_HOST}"
   SSH_DOOR="ssh -t ${AUTH}"
@@ -28,7 +24,6 @@ if [[ $SYNC_BY_SSH -eq 1 ]]; then
   DESTINATION="${DB_STORAGE_FOLDER}/"
   rsync -aO --chown=${USER}:${OWN_GROUP} ${SOURCE} ${DESTINATION}
 #  OUTPUT="$(scp  ${AUTH}:${SOURCE_SSH_FOLDER}/storage/${FILENAME}.tar.gz ${DB_STORAGE_FOLDER}/)"
-
 
   bash bin/db-restore.sh -s -f ${FILENAME} \
       && bash bin/db-storage-manager.sh

@@ -17,5 +17,3 @@ for FILE in $FILES; do
         rm  ${DB_STORAGE_FOLDER}/$FILE
     fi
 done
-
-#rm ${DB_STORAGE_FOLDER}/${DB_DUMP_UNPACKED_FILE_MASK} || true
