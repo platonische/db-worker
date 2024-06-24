@@ -13,7 +13,3 @@ if [[ $SERVER_LIVE -eq 1 ]]; then
 fi
 
 bash ./bin/get-live-db.sh 2>&1
-#\
-#  && bash bin/db-restore.sh 2>&1 \
-#  && bash bin/db-storage-manager.sh
-
