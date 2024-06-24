@@ -12,15 +12,16 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-while true; do
-    read -p "Do you wish to continue? Yes[No] " yn
-    case $yn in
-        [Yy]* ) break;;
-        [Nn]* ) exit;;
-        * ) exit;;
-    esac
-done
-
+if [[ $SILENT_MODE -eq 0 ]]; then
+  while true; do
+      read -p "Do you wish to continue? Yes[No] " yn
+      case $yn in
+          [Yy]* ) break;;
+          [Nn]* ) exit;;
+          * ) exit;;
+      esac
+  done
+fi
 
 
 PATTERN_TAR=".sql.tar.gz$"

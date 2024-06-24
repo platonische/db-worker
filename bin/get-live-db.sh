@@ -21,9 +21,7 @@ if [[ $SYNC_BY_SSH -eq 1 ]]; then
   SSH_DOOR="ssh -t ${AUTH}"
 
   FILENAME=$($SSH_DOOR "cd ${SOURCE_SSH_FOLDER} && bash ${SOURCE_DUMP_TOOL_SCRIPT};")
-  sleep 2
-#  `$SSH_DOOR "cd ${SOURCE_SSH_FOLDER} && bash ${SOURCE_DUMP_TOOL_SCRIPT} ${FILENAME}; >> /dev/null 2>&1"`
-  scp ${AUTH}:${SOURCE_SSH_FOLDER}/${FILENAME} ${DB_STORAGE_FOLDER}/
+  FILENAME="${FILENAME%.tar.gz*}.tar.gz"
 
   SOURCE="${AUTH}:${SOURCE_SSH_FOLDER}/${FILENAME}"
   OWN_GROUP="www-data"
@@ -32,16 +30,8 @@ if [[ $SYNC_BY_SSH -eq 1 ]]; then
 #  OUTPUT="$(scp  ${AUTH}:${SOURCE_SSH_FOLDER}/storage/${FILENAME}.tar.gz ${DB_STORAGE_FOLDER}/)"
 
 
-#  echo $FILENAME
-#  echo $OUTPUT
-
-bash bin/db-restore.sh ${DB_STORAGE_FOLDER}/${FILENAME} \
-    && bash bin/db-storage-manager.sh
-
-#  bash bin/db-restore.sh storage/${FILENAME}.tar.gz \
-#    && bash bin/db-storage-manager.sh
-
-
+  bash bin/db-restore.sh -s ${FILENAME} \
+      && bash bin/db-storage-manager.sh
   exit 0
 fi
 
