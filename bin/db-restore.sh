@@ -7,7 +7,7 @@ cd $ROOTPATH
 
 source ./src/loader.sh
 
-if [ -z "$FILENAME" ]; then
+if [ -z "$FILENAMEOPTION" ]; then
   echo "Failed. Add dump file name as argument"
   exit 1
 fi
@@ -23,7 +23,7 @@ if [[ $SILENT_MODE -eq 0 ]]; then
   done
 fi
 
-
+FILENAME=$FILENAMEOPTION
 PATTERN_TAR=".sql.tar.gz$"
 if [[ $FILENAME =~ ${PATTERN_TAR} ]]; then
   UNPACK_FILENAME=$FILENAME
