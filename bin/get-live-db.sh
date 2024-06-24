@@ -30,7 +30,7 @@ if [[ $SYNC_BY_SSH -eq 1 ]]; then
 #  OUTPUT="$(scp  ${AUTH}:${SOURCE_SSH_FOLDER}/storage/${FILENAME}.tar.gz ${DB_STORAGE_FOLDER}/)"
 
 
-  bash bin/db-restore.sh ${FILENAME} \
+  bash bin/db-restore.sh -s ${FILENAME} \
       && bash bin/db-storage-manager.sh
   exit 0
 fi
