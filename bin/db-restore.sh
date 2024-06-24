@@ -7,7 +7,7 @@ cd $ROOTPATH
 
 source ./src/loader.sh
 
-if [ -z "$1" ]; then
+if [ -z "$FILENAME" ]; then
   echo "Failed. Add dump file name as argument"
   exit 1
 fi
@@ -25,23 +25,23 @@ fi
 
 
 PATTERN_TAR=".sql.tar.gz$"
-if [[ $1 =~ ${PATTERN_TAR} ]]; then
-  UNPACK_FILENAME=$1
-  tar -xzf ${ROOTPATH}/$1 -C ${TMP_FOLDER}
+if [[ $FILENAME =~ ${PATTERN_TAR} ]]; then
+  UNPACK_FILENAME=$FILENAME
+  tar -xzf ${ROOTPATH}/$FILENAME -C ${TMP_FOLDER}
   CROPPED_FILENAME=${UNPACK_FILENAME::${#UNPACK_FILENAME}-7}
-  FILENAME=${TMP_FOLDER}/$(basename ${CROPPED_FILENAME})
+  FNAME=${TMP_FOLDER}/$(basename ${CROPPED_FILENAME})
 else
-  cp $1 ${TMP_FOLDER}
-  FILENAME=${TMP_FOLDER}/$(basename $1)
+  cp $FILENAME ${TMP_FOLDER}
+  FNAME=${TMP_FOLDER}/$(basename $FILENAME)
 fi
 
-echo "FILENAME: $FILENAME"
+#echo "FILENAME: $FNAME"
 
-bash bin/db-fixdefiner.sh $FILENAME || true
+bash bin/db-fixdefiner.sh $FNAME || true
 
 echo "Restore db"
 
-mysql -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} -p${DB_PASS} ${DB_NAME} < $FILENAME
+mysql -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} -p${DB_PASS} ${DB_NAME} < $FNAME
 echo "Db is restored.\n"
 
 rm $FILENAME

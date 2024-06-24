@@ -1,7 +1,7 @@
 SILENT_MODE=0
 
 
-while getopts e:s opts; do
+while getopts e:f:s opts; do
    case ${opts} in
       s) SILENT_MODE=1 ;;
       e)
@@ -22,5 +22,7 @@ while getopts e:s opts; do
           IMPORT=0;
         fi
         ;;
+      f)
+        FILENAME=${OPTARG} ;;
    esac
 done
