@@ -23,6 +23,6 @@ while getopts e:f:s opts; do
         fi
         ;;
       f)
-        FILENAME=${OPTARG} ;;
+        FILENAMEOPTION=${OPTARG} ;;
    esac
 done
