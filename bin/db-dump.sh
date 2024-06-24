@@ -18,7 +18,7 @@ mysqldump -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} -p${DB_PASS}  ${DB_NAME} > $
 	&& tar -czf ${FILENAME}.tar.gz -C $(dirname "${FILENAME}") $(basename "${FILENAME}") \
 	&& rm ${FILENAME}
 
-echo ${FILENAME}.tar.gz
-echo "Dump is done."
-
 bash bin/db-storage-manager.sh
+
+# this is for catching file name
+echo ${FILENAME}.tar.gz
