@@ -1,12 +1,16 @@
 checkLastReturnCode() {
   returnCode=$?
   if [ $returnCode -ne 0 ]; then
-      if [ -z "$NOTIFY_SUBJECT" ]; then
-          NOTIFY_SUBJECT="Default subject";
+      if [ -z "$1" ]; then
+          1="Default";
       fi
-      BODY=$1
+      if [ -z "$2" ]; then
+          2="No error description";
+      fi
+      TOPIC=$1
+      BODY=$2
 
-      notify "${NOTIFY_SUBJECT}" "${returnCode}"
+      notify "${TOPIC}" "${BODY}" "${USER}"
       exit 1
     fi
 }
