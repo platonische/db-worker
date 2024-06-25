@@ -35,7 +35,7 @@ else
   FNAME=${TMP_FOLDER}/$(basename $FILENAME)
 fi
 
-bash bin/db-fixdefiner.sh $FNAME || true
+bash bin/db-fix.sh $FNAME || true
 
 echo "Restoring db"
 mysql -h ${DB_HOST} -P ${DB_PORT} -u ${DB_USER} -p${DB_PASS} ${DB_NAME} < $FNAME
