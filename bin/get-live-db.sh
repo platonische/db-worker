@@ -26,10 +26,11 @@ if [[ $SYNC_BY_SSH -eq 1 ]]; then
 fi
 
 if [[ $SYNC_BY_SSH -eq 0 ]]; then
-  AUTH="${SOURCE_SSH_USER}@${SOURCE_SSH_HOST}"
-  SSH_DOOR="ssh -t ${AUTH}"
 
-  FILENAME=$(bash ${SOURCE_SSH_FOLDER}/${SOURCE_DUMP_TOOL_SCRIPT})
+  cd ${SOURCE_SSH_FOLDER}
+  FILENAME=$(bash ${SOURCE_DUMP_TOOL_SCRIPT})
+  cd $ROOTPATH
+
   FILENAME="${FILENAME%.tar.gz*}.tar.gz"
 
   SOURCE="${SOURCE_SSH_FOLDER}/${FILENAME}"
