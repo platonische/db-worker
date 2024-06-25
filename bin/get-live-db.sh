@@ -27,16 +27,16 @@ fi
 
 if [[ $SYNC_BY_SSH -eq 0 ]]; then
 
-  cd ${SOURCE_SSH_FOLDER}
+  `cd ${SOURCE_SSH_FOLDER}`
   FILENAME=$(bash ${SOURCE_DUMP_TOOL_SCRIPT})
-  cd $ROOTPATH
+  `cd $ROOTPATH`
 
   FILENAME="${FILENAME%.tar.gz*}.tar.gz"
 
-  SOURCE="${SOURCE_SSH_FOLDER}/${FILENAME}"
-  OWN_GROUP="www-data"
-  DESTINATION="${DB_STORAGE_FOLDER}/"
-  rsync -aO --chown=${USER}:${OWN_GROUP} ${SOURCE} ${DESTINATION}
+#  SOURCE="${SOURCE_SSH_FOLDER}/${FILENAME}"
+#  OWN_GROUP="www-data"
+#  DESTINATION="${DB_STORAGE_FOLDER}/"
+#  rsync -aO --chown=${USER}:${OWN_GROUP} ${SOURCE} ${DESTINATION}
 fi
 
 bash bin/db-restore.sh -s -f ${FILENAME} \
